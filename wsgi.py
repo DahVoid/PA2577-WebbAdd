@@ -42,8 +42,8 @@ with app.test_request_context():
 def login() -> str:
     """
     Login function
-    """
-    if request.method == 'POST':
-        # return do_the_login()
-    else:
-        # return show_the_login_form()
+    # """
+    # if request.method == 'POST':
+    #     # return do_the_login()
+    # else:
+    #     # return show_the_login_form()
