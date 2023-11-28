@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  flask_app:
+    build:
+      context: .
+      dockerfile: ./app_cart/Dockerfile
+    ports:
+      - 3000:5000
+    volumes:
+      - ./app_cart:/app
+  textstore:
+    image: mongo 
+    command: --quiet -- syslog
+    expose:
+      - 27017
