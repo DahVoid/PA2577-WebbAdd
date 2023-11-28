@@ -8,7 +8,7 @@ kubectl apply -f deployment.yaml
 kubectl get deployment
 kubectl delete deployment <deployment name>
 ### Start volume 
-docker compose up 
+docker compose up -d
 ### Stop volume
 docker compose down 
 ### Docker build
