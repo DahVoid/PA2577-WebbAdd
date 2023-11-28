@@ -3,13 +3,23 @@ services:
   flask_app:
     build:
       context: .
-      dockerfile: ./app_cart/Dockerfile
+      dockerfile: ./app_shop/Dockerfile
     ports:
       - 3000:5000
     volumes:
-      - ./app_cart:/app
+      - ./app_shop:/app
   textstore:
     image: mongo 
-    command: --quiet -- syslog
+    hostname: test_mongodb
+    command: --quiet --syslog
     expose:
       - 27017
+    volumes:
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+      - textstore-data:/data/db
+      - mongo-config:/data/configdb
+
+volumes:
+  textstore-data:
+  mongo-config:
+
