@@ -27,16 +27,20 @@ def hello():
 
     # return render_template("index.html")
 
-    animal = {"Type": "Lizard", "Name": "Plato"}
+    animal = {"Type": "Lizard", "Name": "Plato", "Time": str(time.time())}
 
     animal_id = animals.insert_one(animal).inserted_id
-    return jsonify({"Time": time.time(), "Message": str(db.list_collection_names())})
+    return jsonify({"Message": str(db.list_collection_names())})
 
 
 @app.route("/animals")
 def get_animals():
+    out_str = "count: " + str(animals.count_documents({})) + "<br>"
+    for animal in animals.find():
+        out_str += str(animal)
+        out_str += "<br>"
 
-    return str(animals.find_one({"Type": "Lizard"}))
+    return out_str
 
 
 if __name__ == "__main__":
