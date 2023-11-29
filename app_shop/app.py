@@ -6,7 +6,7 @@ import time
 
 app = Flask(__name__)
 
-client = MongoClient('test_mongodb', 27017)
+client = MongoClient('mongodb', 27017)
 db = client.dev
 animals = db.animals
 

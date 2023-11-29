@@ -8,18 +8,16 @@ services:
       - 3000:5000
     volumes:
       - ./app_shop:/app
-  textstore:
+  db:
     image: mongo 
-    hostname: test_mongodb
+    hostname: mongodb
     command: --quiet --syslog
     expose:
       - 27017
-    volumes:
-      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
-      - textstore-data:/data/db
+    volumes: # Used for persistence
+      - db-data:/data/db
       - mongo-config:/data/configdb
 
 volumes:
-  textstore-data:
+  db-data:
   mongo-config:
-
