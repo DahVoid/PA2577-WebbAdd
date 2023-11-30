@@ -1,13 +1,28 @@
 version: "3.8"
-services:
-  flask_app:
+services: 
+
+  flask_app_front:
     build:
-      context: .
-      dockerfile: ./app_shop/Dockerfile
+      context: ./app_front/
+      dockerfile: ./Dockerfile
     ports:
       - 3000:5000
     volumes:
-      - ./app_shop:/app
+      - ./app_front:/app
+    environment:
+      BACKEND: flask_app_back
+      DB: db
+
+
+  flask_app_back:
+    build:
+      context: ./app_back/
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./app_back:/app
+    environment:
+      DB: db
+
   db:
     image: mongo 
     hostname: mongodb
@@ -21,3 +36,4 @@ services:
 volumes:
   db-data:
   mongo-config:
+
