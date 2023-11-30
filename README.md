@@ -29,8 +29,8 @@ cd app
 docker build . -t oscced/flask-kubernetes
 docker push oscced/flask-kubernetes
 cd ..
-kubectl delete --cascade="foreground" -f kubernetes/flask-apps.yaml.yaml
-kubectl apply -f kubernetes/flask-apps.yaml.yaml
+kubectl delete --cascade="foreground" -f kubernetes/flask-apps.yaml
+kubectl apply -f kubernetes/flask-apps.yaml
 ### Start kube mongodb
 kubectl apply -f kubernetes/mongodb-svc.yaml
 kubectl apply -f kubernetes/mongodb-statefulset.yaml
