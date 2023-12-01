@@ -16,36 +16,36 @@ animals = db.animals
 def ping_server():
     # Get string from backend
     # res = ""
-    res = requests.get("http://flask_app_back:5000/get_str")
+    res = requests.get("http://flask-app-back:5000/get_str")
 
     return "Welcome to the frontend." + str(res.content)
 
 
-# @app.route("/hello", methods=("GET", "POST"))
-# def hello():
-#     """
-#     This function just responds to the browser ULR
-#     """
-#     #
-#     # if request.method == "POST":
-#     #     content = time.time()
+@app.route("/hello", methods=("GET", "POST"))
+def hello():
+    """
+    This function just responds to the browser ULR
+    """
+    #
+    # if request.method == "POST":
+    #     content = time.time()
 
-#     # return render_template("index.html")
+    # return render_template("index.html")
 
-#     animal = {"Type": "Lizard", "Name": "Plato", "Time": str(time.time())}
+    animal = {"Type": "Lizard", "Name": "Plato", "Time": str(time.time())}
 
-#     animal_id = animals.insert_one(animal).inserted_id
-#     return jsonify({"Message": str(db.list_collection_names())})
+    animal_id = animals.insert_one(animal).inserted_id
+    return jsonify({"Message": str(db.list_collection_names())})
 
 
-# # @app.route("/animals")
-# def get_animals():
-#     out_str = "count: " + str(animals.count_documents({})) + "<br>"
-#     for animal in animals.find():
-#         out_str += str(animal)
-#         out_str += "<br>"
+@app.route("/animals")
+def get_animals():
+    out_str = "count: " + str(animals.count_documents({})) + "<br>"
+    for animal in animals.find():
+        out_str += str(animal)
+        out_str += "<br>"
 
-#     return out_str
+    return out_str
 
 
 if __name__ == "__main__":

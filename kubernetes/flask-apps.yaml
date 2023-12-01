@@ -1,10 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-service
+  name: flask-service-front
+  labels: 
+    app: flask-app-front
 spec:
   selector:
-    app: flask-app
+    app: flask-app-front
   ports:
   - port: 3000
     targetPort: 5000
@@ -14,20 +16,55 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app
+  name: flask-app-front
+  labels:
+    app: flask-app-front
 spec:
   selector:
     matchLabels:
-      app: flask-app
-  replicas: 4
+      app: flask-app-front
+  replicas: 1
   template:
     metadata:
       labels:
-        app: flask-app
+        app: flask-app-front
     spec:
       containers:
       - name: flask-app
-        image: oscced/flask-kubernetes:latest
+        image: oscced/flask-kubernetes-front:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-back
+spec:
+  selector:
+    app: flask-app-back
+  ports:
+  - port: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-back
+  labels:
+    app: flask-app-back
+spec:
+  selector:
+    matchLabels:
+      app: flask-app-back
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flask-app-back
+    spec:
+      containers:
+      - name: flask-app
+        image: oscced/flask-kubernetes-back:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
