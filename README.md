@@ -1,6 +1,3 @@
-#
-Store front and cart with mongodb database
-
 # important commands
 ### Run kubernetes app
 kubectl apply -f flask-apps.yaml.yaml
