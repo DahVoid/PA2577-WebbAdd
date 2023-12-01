@@ -23,7 +23,7 @@ spec:
   selector:
     matchLabels:
       app: flask-app-front
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -56,7 +56,7 @@ spec:
   selector:
     matchLabels:
       app: flask-app-back
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
