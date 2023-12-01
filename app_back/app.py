@@ -8,12 +8,20 @@ app = Flask(__name__)
 
 client = MongoClient('mongodb', 27017)
 db = client.dev
-animals = db.animals
+history = db.history
 
 
 @app.route('/')
 def ping_server():
     return "Welcome to the backend."
+
+
+@app.route('/add/<a>/<b>', methods=["GET", "POST"])
+def add(a, b):
+    result = str(int(a) + int(b))
+    row = {"A": a, "B": b, "R": result}
+    row_id = history.insert_one(row).inserted_id
+    return result
 
 
 @app.route('/get_str', methods=["GET"])
@@ -39,14 +47,14 @@ def get_str():
 #     return jsonify({"Message": str(db.list_collection_names())})
 
 
-@app.route("/animals")
-def get_animals():
-    out_str = "count: " + str(animals.count_documents({})) + "<br>"
-    for animal in animals.find():
-        out_str += str(animal)
-        out_str += "<br>"
+# @app.route("/animals")
+# def get_animals():
+#     out_str = "count: " + str(animals.count_documents({})) + "<br>"
+#     for animal in animals.find():
+#         out_str += str(animal)
+#         out_str += "<br>"
 
-    return out_str
+#     return out_str
 
 
 if __name__ == "__main__":

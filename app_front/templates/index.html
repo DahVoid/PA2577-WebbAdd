@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebAdd</title>
+</head>
+<body>
+    <h1>WebAdd</h1>
+    <p>WebAdd is a simple web application that allows you to add two numbers.</p>
+    <p>It is a simple example of a web application that uses a REST API.</p>
+    <form method="post">
+        <p><input type="text" name="a" /></p>
+        <p><input type="text" name="b" /></p>
+        <p><input type="submit" value="Add" /></p>
+        {% if result %}
+            <p>{{ result }}</p>
+        {% else %}
+            <p>Enter two numbers and click Add.</p>
+        {% endif %}
+    </form>
+
+    <h2>History</h2>
+    {% if history %}
+        <ul>
+            {% for item in history %}
+                <li> {{item}} </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No history.</p>
+    {% endif %}
+</body>
+</html>
